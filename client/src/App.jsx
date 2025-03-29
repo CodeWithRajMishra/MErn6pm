@@ -1,11 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./pages/Home";
-import Insert from "./pages/Insert";
-import Display from "./pages/Display";
-import Search from "./pages/Search";
-import Update from "./pages/Update";
-import EditData from "./pages/EditData";
+import Registration from "./pages/Registration";
+import Login from "./pages/Login";
+import DashBoard from "./pages/DashBoard";
 const App=()=>{
   return(
     <>
@@ -14,11 +12,9 @@ const App=()=>{
           <Route path="/" element={<Layout/>}>
            <Route index element={<Home/>} />
            <Route path="home" element={<Home/>}/>
-           <Route path="insert" element={<Insert/>}/>
-           <Route path="display" element={<Display/>}/>
-           <Route path="search" element={<Search/>}/>
-           <Route path="update" element={<Update/>}/>
-           <Route path="editdata/:id" element={<EditData/>}/>
+           <Route path="registration" element={<Registration/>}/>
+           <Route path="login" element={<Login/>}/>
+           <Route path="dashboard" element={<DashBoard/>}/>
           </Route>
          </Routes>
        </BrowserRouter>

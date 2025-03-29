@@ -1,58 +1,39 @@
 const EmpModel= require("../models/empModel");
 
 
+const empRegistration=async(req, res)=>{
+   const {name, city, email, password} = req.body;
+   const Employee = await EmpModel.create({
+      name:name,
+      city:city, 
+      email:email,
+      password:password
 
-const dataSave=async(req, res)=>{
-   const {empno, name, designation, salary} = req.body;
-   const Employee = await EmpModel.create({ 
-    empno:empno,
-    name:name,
-    designation:designation, 
-    salary:salary
    })
-   res.send({msg:"Data Suceefully Inserted!!!"});
+      
+      res.send({msg:"You are succesfully registered!!!"});
 }
 
-const dataDisplay=async(req, res)=>{
-    const Employee= await EmpModel.find();
-    res.send(Employee);
-}
-
-
-const dataSearch=async(req, res)=>{
-   const {empno} = req.body; 
-   const Employee = await EmpModel.find({empno:empno});
-   res.send(Employee);
-}
-
-const dataDelete=async(req, res)=>{
-   const {id}=req.body; 
-   const Employee = await EmpModel.findByIdAndDelete(id);
-   res.send("Data succesfully deleted!!!");
-
-}
-const dataEdit=async(req, res)=>{
-    const {id} = req.body;
-     const Employee= await EmpModel.findById(id);
-    res.send(Employee);
-}
-
-const dataEditSave=async(req, res) =>{
-  const {_id, empno, name,designation,salary} = req.body;
-   const Employee = await EmpModel.findByIdAndUpdate(_id, {
-    empno:empno,
-    name:name,
-    designation:designation,
-    salary:salary
-   });
-   res.send("data aupdated Succesfully!!!");
+const empLogin=async(req, res)=>{
+   const {email, password} = req.body;
+    try {
+      const Employee = await EmpModel.findOne({email:email});
+      if (!Employee)
+      {
+        res.status(400).send({msg:"Invalid Email!"})
+      }
+      if (Employee.password!=password)
+      {
+        res.status(400).send({msg:"Invalid Password!"});
+      }
+      res.status(200).send({msg:"Login Succesfull", Employee:Employee}); 
+    
+   }catch (error) {
+        console.log(error);
+    }
 }
 
 module.exports={
-  dataSave,
-  dataDisplay,
-  dataSearch,
-  dataDelete,
-  dataEdit,
-  dataEditSave
+   empRegistration,
+   empLogin
 }

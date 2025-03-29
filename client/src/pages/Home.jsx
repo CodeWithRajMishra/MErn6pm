@@ -1,6 +1,8 @@
 
 const Home=()=>{
-    return(
+
+
+  return(
         <>
           <h1> Welcome To Home Page</h1>
         </>
