@@ -15,24 +15,19 @@ const Login=()=>{
         setInput(values=>({...values, [name]:value}));
         console.log(input);
     }
+
     const handleSubmit=async(e)=>{
         e.preventDefault();
         try {
         let api="http://localhost:8000/employee/login";
         const response= await axios.post(api, input);
-        toast.info(response.data.msg);
-        localStorage.setItem("username", response.data.Employee.name);
-        localStorage.setItem("useremail", response.data.Employee.email);
-        console.log(response);
-        navigate("/dashboard")
+        console.log(response.data)        
+        localStorage.setItem("token", response.data.token);
+        navigate("/");
         } catch (error) {
-          console.log(error);
-          toast.error(error.response.data.msg);
+          alert(error.response.data.msg);
         }
-
-
     }
-
     return(
         <>
          <h1> User Registration</h1>

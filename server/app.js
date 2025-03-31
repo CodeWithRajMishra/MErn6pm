@@ -13,7 +13,10 @@ app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json())
 app.use(cors());
 
+
 app.use("/employee", EmpRoute);
+
+
 
 
 const port=process.env.PORT;

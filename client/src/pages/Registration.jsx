@@ -19,9 +19,13 @@ const Registration=()=>{
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
-        let api="http://localhost:8000/employee/registration";
-        const response= await axios.post(api, input);
-        toast.success(response.data.msg)
+        try {
+          let api="http://localhost:8000/employee/registration";
+          const response= await axios.post(api, input);
+          toast.success(response.data.msg)
+        } catch (error) {
+            console.log(error);
+        }
        
     }
 
