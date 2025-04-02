@@ -39,10 +39,23 @@ const empLogin=async(req, res)=>{
    } catch (error) {
       console.log(error);
    }
-    
+}
+
+
+const empAuth=async(req, res)=>{
+   const {autherization} =req.headers;
+   try {
+       const tokenDecode= await jwt.verify(autherization, process.env.SECRETE_KEY);
+       console.log(tokenDecode.id);
+       const Employee= await EmpModel.findById(tokenDecode.id).select("-password");
+      res.status(200).send(Employee);
+   } catch (error) {
+       console.log(error);
+   }
 }
 
 module.exports={
    empRegistration,
-   empLogin
+   empLogin,
+   empAuth
 }
